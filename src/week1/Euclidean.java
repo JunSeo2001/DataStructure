@@ -1,3 +1,5 @@
+package week1;
+
 public class Euclidean {
     public static int fibo1(int n){
         if(n<0) return -1;
