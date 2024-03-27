@@ -5,15 +5,29 @@ public class Maze{
     int count=0;
 
     public Maze(int [][] in) {
+
         maze=in;
     }
 
     public int findMaxIter(int i, int j) {
+        int[][] iter = new int[i + 1][j + 1];
+        iter[0][0] = maze[0][0];
 
+        for (int col = 1; col <= j; col++) {
+            iter[0][col] = iter[0][col - 1] + maze[0][col];
+        }
 
+        for (int row = 1; row <= i; row++) {
+            iter[row][0] = iter[row - 1][0] + maze[row][0];
+        }
 
+        for (int row = 1; row <= i; row++) {
+            for (int col = 1; col <= j; col++) {
+                iter[row][col] = maze[row][col] + Math.max(iter[row - 1][col], iter[row][col - 1]);
+            }
+        }
 
-        return 0;
+        return iter[i][j];
     }
 
     public int findMaxRec(int i, int j) {
@@ -44,7 +58,7 @@ public class Maze{
 
         Maze me = new Maze(maze);
 
-        System.out.println("MaxSum = "+me.findMaxIter(maze.length-1,maze.length-1));
-        System.out.println("MaxSum = "+me.findMaxRec(maze.length-1,maze.length-1)+" "+"count = "+me.getCount());
+        System.out.println("MaxSumIter = "+me.findMaxIter(maze.length-1,maze.length-1));
+        System.out.println("MaxSumRec = "+me.findMaxRec(maze.length-1,maze.length-1)+" "+"count = "+me.getCount());
     }
 }
