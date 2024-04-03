@@ -32,5 +32,6 @@ public class Euclidean {
 
         System.out.println(GCD(428, 38));
 
+
     }
 }

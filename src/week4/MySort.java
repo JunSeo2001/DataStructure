@@ -3,80 +3,141 @@ package week4;
 public class MySort {
 
 
-    public int[] selectionSort(int [] data) {
+    public int[] selectionSort(int[] data) {
         int n = data.length;
         for (int i = 0; i < n; i++) {
-            for (int j =i+1; j<n; j++)
-            if (data[j]<data[i])
-                data = swap(data, i, j);
+            for (int j = i + 1; j < n; j++)
+                if (data[j] < data[i])
+                    data = swap(data, i, j);
         }
         return data;
     }
 
-    public int[] bubbleSort(int [] data) {
+    public int[] bubbleSort(int[] data) {
         int n = data.length;
-        for (int i = n-1 ; i>=0; i--) {
-            for (int j = 0; j<i; j++)
-                if (data[j]>data[j+1])
-                    data = swap(data, j, j+1);
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++)
+                if (data[j] > data[j + 1])
+                    data = swap(data, j, j + 1);
         }
         return data;
     }
 
-    public int[] quickSort(int [] data) {
+    //오버로딩
+    public int[] quickSort(int[] data) {
         quickSort(data, 0, data.length - 1);
         return data;
     }
 
+
     public int[] quickSort(int[] data, int p, int r) {
         if (p < r) {
             int q = partition(data, p, r);
-            quickSort(data, p, q-1);
+            quickSort(data, p, q - 1);
             quickSort(data, q + 1, r);
         }
         return data;
     }
 
     private int partition(int[] data, int p, int r) {
-//        int pivot = r;
-//        int left = p;
-//        int right = r-1;
-//
-//        while (left < right) {
-//            while (left<right && data[left] < data[pivot])
-//                left++;
-//            while (left < right && data[right] >= data[pivot])
-//                right--;
-//            if(left < right)
-//                swap(data, left, right);
-//        }
-//        //while 문 빠져나오는 것은 left랑 rigt
+        int pivot = r;
+        int left = p;
+        int right = r - 1;
+//        int right = r;
+
+        while (left < right) {
+            while (left < right && data[left] < data[pivot])
+                left++;
+            while (left < right && data[right] >= data[pivot])
+                right--;
+            if (left < right)
+                swap(data, left, right);
+        }
+
+        if (data[right] > data[pivot]) {
+            swap(data, pivot, right);
+            return right;
+        } else {
+
+        }
+        //while 문 빠져나오는 것은 left랑 rigt
 //        swap(data, pivot, right);
 //        return right;
 
-        int x = data[r];//pivot
-        int k = p - 1; //# of left items
-
-        for (int i = p; i < r; i++) {
-            if (data[i] <= x) {
-                swap(data, ++k, i);
-            }
-        }
-        swap(data, k + 1, r);
-        return k + 1;
+//        int x = data[r];//pivot
+//        int k = p - 1; //# of left items
+//
+//        for (int i = p; i < r; i++) {
+//            if (data[i] <= x) {
+//                swap(data, ++k, i);
+//            }
+//        }
+//        swap(data, k + 1, r);
+//        return k + 1;
+        return pivot;
     }
 
     // Merge Sort
 
-    public int[] mergeSort(int [] data) {
 
-        return data;
+    public void mergeSort(int [] data) {
+        mergeSort(data, 0, data.length - 1);
+
+    }
+
+    private void mergeSort(int[] data, int p, int r) {
+        if (p < r) {
+            int q = (p+r)/2;
+            mergeSort(data, p, q);
+            mergeSort(data, q + 1, r);
+            merge(data, p, q, r);
+        }
+    }
+
+    private void merge(int[] data, int p, int q, int r) {
+        int[] sorted = new int[data.length];
+        int i = p;
+        int j = q+1;
+        int k = p; //저장될 어레이의 pointer
+
+        while (i<=q && j<=r) {
+            if (data[i] < data[j]) {
+                sorted[k++] = data[i++];
+              }else {
+                sorted[k++] = data[j++];
+            }
+        }
+        while (i <= q) {
+            sorted[k++] = data[i++];
+        }
+        while (j <= r) {
+            sorted[k++] = data[j++];
+        }
+        for (i = p; i <= r; i++) {
+            data[i] = sorted[i];
+        }
+
     }
 
     // Insertion Sort
 
     public int[] insertionSort(int[] data) {
-
+        int dataSize = data.length;
+        if (dataSize > 1) {
+            for (int i = 1; i < dataSize; i++) {
+                int j = 0;
+                while (data[i] > data[j] && j < i) {
+                    j++;
+                }
+                if (j < i) {
+                    int temp = data[i];
+                    for (int k = i - 1; k >= j; k--) {
+                        data[k + 1] = data[k];
+                    }
+                    data[j] = temp;
+                }
+            }
+        }
         return data;
     }
 
@@ -104,15 +165,15 @@ public class MySort {
         // showData(dataSorted)
 
         MySort ms = new MySort();
-        dataSorted=data.clone();
-        ms.selectionSort(dataSorted);
-        System.out.println("\n< Selection Sort >");
-        showData(dataSorted);
-
-        dataSorted=data.clone();
-        ms.bubbleSort(dataSorted);
-        System.out.println("\n< Bubble Sort >");
-        showData(dataSorted);
+//        dataSorted=data.clone();
+//        ms.selectionSort(dataSorted);
+//        System.out.println("\n< Selection Sort >");
+//        showData(dataSorted);
+//
+//        dataSorted=data.clone();
+//        ms.bubbleSort(dataSorted);
+//        System.out.println("\n< Bubble Sort >");
+//        showData(dataSorted);
 
         dataSorted=data.clone();
         ms.quickSort(dataSorted);
