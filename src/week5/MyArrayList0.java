@@ -35,14 +35,17 @@ public class MyArrayList0 {
     }
 
     public int removeIndex(int index) {  //return value
+
         return 0;
     }
 
     public int removeData(int data) {   //return index
+
         return 0;
     }
 
     public int get(int index) {
+
         return 0;
     }
 
@@ -51,6 +54,7 @@ public class MyArrayList0 {
     }
 
     public int indexOF(int data) { // return index, if not found, return -1
+
         return 0;
     }
 
@@ -79,6 +83,8 @@ public class MyArrayList0 {
         al.showArray();
         al.add(5, 100);
         al.showArray();
+
+        System.out.println(al);
 
         System.out.println(al.indexOF(100));
 

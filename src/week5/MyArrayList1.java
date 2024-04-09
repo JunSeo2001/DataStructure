@@ -25,48 +25,82 @@ public class MyArrayList1 {
 
 
     public void add(int index, int data) {
-        if (nOfItems >= maxSize) {                     //array 메모리 체크
-            System.out.println("Memory Full!!");
-            return;
+//        if (nOfItems >= maxSize) {                     //array 메모리 체크
+//            System.out.println("Memory Full!!");
+//            return;
+//        }
+        if (nOfItems >=maxSize) {
+            grow();
         }
         if (index<0 || index >= nOfItems) {           //array 범위 체크
             System.out.println("Invalid Index!!");
             return;
         }
         for (int i = nOfItems-1; i >= index; i--) {
+//            int temp = array[i+1];
             array[i+1] = array[i];
-            array[index] = data;
-            nOfItems++;
         }
+        array[index] = data;
+        nOfItems++;
 
     }
 
     public int removeIndex(int index) {  //return value
-        return 0;
+        if (index < 0 || index >= nOfItems) {
+            System.out.println("Invalid Index!!");
+            return -1;
+        }
+        int removedElement = array[index];
+        for (int i = index; i < nOfItems - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        nOfItems--;
+        return removedElement;
     }
 
-    public int removeData(int data) {   //return index
-        return 0;
+    public int removeData(int data) {
+        int index = indexOF(data);
+        if (index != -1) {
+            removeIndex(index);
+        }
+        return index;
     }
 
     public int get(int index) {
-        return 0;
+        if (index < 0 || index >= nOfItems) {
+            System.out.println("Invalid Index!!");
+            return -1;
+        }
+        return array[index];
     }
 
     public void set(int index, int data) {
-
+        if (index < 0 || index >= nOfItems) {
+            System.out.println("Invalid Index!!");
+            return;
+        }
+        array[index] = data;
     }
 
-    public int indexOF(int data) { // return index, if not found, return -1
-        return 0;
+    public int indexOF(int data) {
+        for (int i = 0; i < nOfItems; i++) {
+            if (array[i] == data) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int size() {
+
         return nOfItems;
     }
 
     public void showArray() {
-
+        for (int i = 0; i < nOfItems; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
     }
 
 
@@ -84,10 +118,21 @@ public class MyArrayList1 {
             al.add(data[i]);
         }
         al.showArray();
+        System.out.println("||");
         al.add(5, 100);
         al.showArray();
-
+        System.out.println("||");
         System.out.println(al.indexOF(100));
+        System.out.println("||");
+        System.out.println(al.size());
 
+        al.removeIndex(5);
+        al.showArray();
+        al.removeData(113);
+        al.showArray();
+        System.out.println(al.get(1));
+        al.set(0,100);
+        al.showArray();
+        System.out.println(al.removeIndex(5));
     }
 }

@@ -58,7 +58,7 @@ public class MySort {
             swap(data, pivot, right);
             return right;
         } else {
-
+            return pivot;
         }
         //while 문 빠져나오는 것은 left랑 rigt
 //        swap(data, pivot, right);
@@ -74,7 +74,7 @@ public class MySort {
 //        }
 //        swap(data, k + 1, r);
 //        return k + 1;
-        return pivot;
+
     }
 
     // Merge Sort
