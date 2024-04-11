@@ -5,9 +5,15 @@ import java.util.List;
 
 public class MyArrayList0 {
 
-    int maxSize = 20;
-    int[] array = new int[20];
-    int nOfItems = 0;
+    int maxSize;
+    int[] array;
+    int nOfItems;
+
+    public MyArrayList0(int n) {
+        maxSize = n;
+        array = new int[maxSize];
+        nOfItems = 0;
+    }
 
     public void add(int data) {   //last add
         if (nOfItems >= maxSize) {
@@ -34,28 +40,61 @@ public class MyArrayList0 {
 
     }
 
-    public int removeIndex(int index) {  //return value
-
-        return 0;
+    private boolean validIndex(int index) {
+        if(index < 0 || index >= nOfItems) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public int removeData(int data) {   //return index
 
-        return 0;
+    public int removeIndex(int index) {  //return value
+        if (validIndex(index)) {
+            int temp = array[index];
+            for (int i = index; i < nOfItems - 1; i++) {
+                array[i] = array[i + 1];
+            }
+            nOfItems --;
+            return temp;
+        }else{
+            System.out.println("Invalid Index!!");
+            return -9999; // let it mean NULL
+        }
+    }
+
+    public int removeData(int data) {
+        int index = indexOF(data);
+        removeIndex(index);
+        return index;
     }
 
     public int get(int index) {
-
-        return 0;
+        if (validIndex(index)) {
+            return array[index];
+        } else {
+            System.out.println("Invalid Index!!");
+            return -9999;
+        }
     }
 
-    public void set(int index, int data) {
-
+    public boolean set(int index, int data) {
+        if (validIndex(index)) {
+            array[index] = data;
+            return true;
+        } else {
+            System.out.println("Invalid Index!!");
+            return false;
+        }
     }
 
-    public int indexOF(int data) { // return index, if not found, return -1
-
-        return 0;
+    public int indexOF(int data) {
+        for (int i = 0; i < nOfItems; i++) {
+            if (array[i] == data) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int size() {
@@ -63,7 +102,14 @@ public class MyArrayList0 {
     }
 
     public void showArray() {
-
+        int n = nOfItems;
+        int nRow = 1 + (int) n / 10;
+        for (int i = 0; i < nRow; i++) {
+            for (int j = i * 10; j < Math.min(n, (i + 1) * 10); j++) {
+                System.out.print(array[j] + " ");
+            }
+            System.out.println();
+        }
     }
 
 
@@ -75,18 +121,45 @@ public class MyArrayList0 {
                 50, 61, 277, 167, 81, 24, 76, 186, 78, 101,
                 301, 62, 152, 219, 294};
 
-        MyArrayList0 al = new MyArrayList0();
+        MyArrayList0 al = new MyArrayList0(2);
 
+        System.out.println(">>> Test : add(data)");
         for (int i = 0; i < 10; i++) {
             al.add(data[i]);
         }
         al.showArray();
+
+
+        System.out.println(">>>Test : add(index, data)");
         al.add(5, 100);
+        al.add(5, 200);
+        al.add(5, 300);
+        al.add(al.size(), 400);
         al.showArray();
 
-        System.out.println(al);
 
-        System.out.println(al.indexOF(100));
+        System.out.println(">>>Test : indexOF(data)");
+        System.out.println(100 + ":"+al.indexOF(100));
+        System.out.println(200 + ":"+al.indexOF(200));
+        System.out.println(300 + ":"+al.indexOF(300));
 
+        System.out.println(">>>Test : set(index, data),get(index)");
+        System.out.println("Before :"+al.get(3));
+        al.set(3, 400);
+        System.out.println("After :"+al.get(3));
+
+        System.out.println(">>>Test : removeIndex(index)");
+        System.out.println("Before :");
+        al.showArray();
+        System.out.println("removeIndex :" + al.removeIndex(3));
+        System.out.println("After :");
+        al.showArray();
+
+        System.out.println(">>>Test : removeData(data)");
+        System.out.println("Before :");
+        al.showArray();
+        System.out.println("removeData :" + al.removeData(100));
+        System.out.println("After :");
+        al.showArray();
     }
 }
