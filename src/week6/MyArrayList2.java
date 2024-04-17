@@ -1,7 +1,5 @@
 package week6;
 
-import week5.MyArrayList1;
-
 public class MyArrayList2<T> {
     int maxSize;
     T[] array;
@@ -55,7 +53,7 @@ public class MyArrayList2<T> {
     }
 
 
-    public T removeIndex(int index) {  //return value
+    public T remove(int index) {  //return value
         if (validIndex(index)) {
             T temp = array[index];
             for (int i = index; i < nOfItems - 1; i++) {
@@ -69,9 +67,9 @@ public class MyArrayList2<T> {
         }
     }
 
-    public int removeData(T data) {
+    public int remove(T data) {
         int index = indexOF(data);
-        removeIndex(index);
+        remove(index);
         return index;
     }
 
@@ -162,14 +160,14 @@ public class MyArrayList2<T> {
         System.out.println(">>>Test : removeIndex(index)");
         System.out.println("Before :");
         al.showArray();
-        System.out.println("removeIndex :" + al.removeIndex(3));
+        System.out.println("removeIndex :" + al.remove(3));
         System.out.println("After :");
         al.showArray();
 
         System.out.println(">>>Test : removeData(data)");
         System.out.println("Before :");
         al.showArray();
-        System.out.println("removeData :" + al.removeData(new MyData(100)));
+        System.out.println("removeData :" + al.remove(new MyData(100)));
         System.out.println("After :");
         al.showArray();
     }

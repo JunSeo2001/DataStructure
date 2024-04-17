@@ -1,5 +1,8 @@
 package week6;
 
+import java.util.Queue;
+import java.util.Stack;
+
 public class MyData {
     int value;
     String name;
@@ -19,5 +22,8 @@ public class MyData {
         return (this.value == ((MyData)that).value);//타입 캐스팅?
     }
 
+
+    Stack<Integer> s;
+    Queue<Integer> q;
 
 }
