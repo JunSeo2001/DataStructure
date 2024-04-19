@@ -5,15 +5,20 @@ import java.util.Stack;
 
 public class MyData {
     int value;
+    Object o;
     String name;
 
     public MyData(int v) {
         value = v;
     }
 
+    public MyData(String n) {
+        name = n;
+    }
+
     @Override
     public String toString() {
-        return "" + value + "";
+        return "" + value + " ";
     }
 
 

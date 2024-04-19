@@ -19,7 +19,7 @@ public class MyArrayList2<T> {
     }
 
     public void add(int index, T data) {
-        if (nOfItems >=maxSize) {
+        if (nOfItems >= maxSize) {
             grow();
         }
         if (!validIndex(index)) {           //array 범위 체크
@@ -125,9 +125,18 @@ public class MyArrayList2<T> {
                 50, 61, 277, 167, 81, 24, 76, 186, 78, 101,
                 301, 62, 152, 219, 294};
 
+        String[] orgData2 = {
+                "나", "너", "우리", "나이"
+        };
+
         MyData[] data = new MyData[orgData.length];
         for (int i = 0; i < data.length; i++) {
             data[i] = new MyData(orgData[i]);
+        }
+
+        MyData[] data2 = new MyData[orgData2.length];
+        for (int i = 0; i < data2.length; i++) {
+            data2[i] = new MyData(orgData2[i]);
         }
 
         MyArrayList2<MyData> al= new MyArrayList2<>(2);
