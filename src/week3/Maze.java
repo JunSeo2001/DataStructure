@@ -30,6 +30,8 @@ public class Maze{
         return iter[i][j];
     }
 
+
+
     public int findMaxRec(int i, int j) {
         count ++;
         if(i==0 && j ==0)

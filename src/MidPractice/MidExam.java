@@ -117,7 +117,6 @@ public class MidExam {
 						// 찾은 위치에 노드 삽입
 						Node temp = current.next;
 						current.next = newNode;
-						newNode.prev = current;
 						newNode.next = temp;
 						temp.prev = newNode;
 						nOfNodes++;

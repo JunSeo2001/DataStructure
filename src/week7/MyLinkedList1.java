@@ -46,6 +46,8 @@ public class MyLinkedList1 {
         nOfNodes++;
     }
 
+
+
     public void add(int index, int data) {
         if (!validIndex(index)) {
             return;
