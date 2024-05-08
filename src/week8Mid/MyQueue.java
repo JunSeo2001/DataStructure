@@ -42,7 +42,7 @@ public class MyQueue {  //  Multi-level Queue ?!
     public void enqueue(int lev, int id) {
 // Q 2-2) HERE !
         Node newNode = new Node(lev, id);
-        if (front == null) {
+        if (rear == null) {
             front = newNode;
             rear = newNode;
             return;
