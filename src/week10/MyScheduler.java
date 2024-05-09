@@ -37,10 +37,6 @@ public class MyScheduler<T extends Comparable<T>> {
                 newNode.next = head;
                 head.prev = newNode;
                 head = newNode;
-
-//                Node temp = head;
-//                head = new Node(p);
-//                head.next = temp;
             }
             else {
                 Node temp;
@@ -65,22 +61,38 @@ public class MyScheduler<T extends Comparable<T>> {
 
     }
     public void done(T p) {
-        if(head != null) {
-            if(head.aPlan.equals(p))
-                head = head.next;
-            else {
-                Node temp1, temp2;
-                temp1 = head;
-                temp2 = temp1.next;
-                while(temp2!= null && (temp2.aPlan.equals(p))) {
-                    temp1 =temp2;
-                    temp2 = temp2.next;
-                }
-                if(temp2 != null) {
-                    temp1.next = temp2.next;
-                }
-            }
+        if (head == null) {
+            System.out.println("스케줄이 없습니다.");
+            return;
         }
+        Node temp = head;
+        while (temp != null && !temp.aPlan.equals(p)) {
+            temp = temp.next;
+        }
+        if (temp == null) {
+            System.out.println("일치하는 스케줄이 없습니다.");
+            return;
+        }
+
+        // 일치하는 노드가 head인 경우
+        if (temp == head) {
+            head = head.next;
+            if (head != null) {
+                head.prev = null;
+            }
+        } else if (temp == tail) {
+            // 일치하는 노드가 tail인 경우
+            tail = tail.prev;
+            if (tail != null) {
+                tail.next = null;
+            }
+        } else {
+            // 일치하는 노드가 중간에 위치하는 경우
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+        }
+        temp.prev = null;
+        temp.next = null;
     }
 
 //   public void showSchedule() {

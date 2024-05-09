@@ -67,9 +67,6 @@ public class SimpleTree {
         t6.makeTree(t3, '*', t6);
 
         SimpleTree t7 = new SimpleTree();
-        t7.makeTree(t5)
-
-
-
+        t7.makeTree(t5, '*', t6);
     }
 }
