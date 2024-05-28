@@ -2,7 +2,7 @@ package week10;
 
 public class SimpleTree {
 
-    class Node{
+    class Node {
         char data;
         Node left;
         Node right;
@@ -40,19 +40,17 @@ public class SimpleTree {
         showTree(root);
     }
     public void showTree(Node p) {
-        if(p != null)
+        if(p != null){
             showTree(p.left);
             showTree(p.right);
-        System.out.println(root.toString());
-        showTree(root.left);
+            System.out.println(p.toString());
+        }
     }
+
 
     public static void main(String[] args) {
         //a*b-c/d를 트리로 만들려고 하는 중
-        SimpleTree SimpleTree = new SimpleTree();
-
         SimpleTree t1 = new SimpleTree();
-
         t1.makeTree('a');
         SimpleTree t2= new SimpleTree();
         t2.makeTree('b');
@@ -62,11 +60,16 @@ public class SimpleTree {
         t4.makeTree('d');
 
         SimpleTree t5= new SimpleTree();
-        t5.makeTree(t5, '*', t5);
+        t5.makeTree(t1, '*', t2);
         SimpleTree t6= new SimpleTree();
-        t6.makeTree(t3, '*', t6);
+        t6.makeTree(t3, '/', t4);
 
         SimpleTree t7 = new SimpleTree();
-        t7.makeTree(t5, '*', t6);
+        t7.makeTree(t5, '-', t6);
+
+        t7.showTree();
+
     }
+
+
 }
