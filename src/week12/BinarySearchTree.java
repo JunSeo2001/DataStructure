@@ -1,5 +1,6 @@
 package week12;
 
+import javax.swing.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -169,6 +170,30 @@ public class BinarySearchTree {
 //            return node;
 //
 //        }
+    }
+
+    private void rotateLeft(Node pp) {
+        if (pp == this.node) {
+            this.node = pp.right;  // this.node = root
+            pp.right.parent = null;
+            pp.right.left = pp;
+            pp.parent = pp.right;
+            pp.right = null;
+        } else {
+            if (pp == pp.parent.left) {
+                pp.parent.left = pp.right;
+                pp.right.parent = pp.parent;
+                pp.right.left = pp;
+                pp.parent = pp.right;
+                pp.right = null;
+            } else {
+                pp.parent.right = pp.right;
+                pp.right.parent = pp.parent;
+                pp.right.left = pp;
+                pp.parent = pp.right;
+                pp.right = null;
+            }
+        }
     }
 
     public void delete(int d) {
