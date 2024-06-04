@@ -100,6 +100,7 @@ public class BinarySearchTree {
     }
 
     public void showTree() {
+
         System.out.println();
         showTree(node);
         System.out.println();
@@ -133,6 +134,33 @@ public class BinarySearchTree {
         }
 
     }
+
+    //전위
+    private void preorder(Node node) {
+        if (node != null) {
+            System.out.print(node.toString());
+            preorder(node.left);
+            preorder(node.right);
+        }
+    }
+    //중위
+    private void inorder(Node node) {
+        if (node != null) {
+            inorder(node.left);
+            System.out.print(node.toString());
+            inorder(node.right);
+        }
+    }
+
+    //후위
+    private void postorder(Node node) {
+        if (node != null) {
+            postorder(node.left);
+            postorder(node.right);
+            System.out.print(node.toString());
+        }
+    }
+
 
     public boolean search(int d) {
         return search(node, d);
@@ -169,37 +197,62 @@ public class BinarySearchTree {
 //            }
 //            return node;
 //
-//        }
+//        } iteration
     }
 
-    private void rotateLeft(Node pp) {
-        if (pp == this.node) {
-            this.node = pp.right;  // this.node = root
-            pp.right.parent = null;
-            pp.right.left = pp;
-            pp.parent = pp.right;
-            pp.right = null;
+    private void rotateLeft(Node root) {
+        if (root == this.node) {
+            this.node = root.right;  // this.node = root
+            root.right.parent = null;
+            root.right.left = root;
+            root.parent = root.right;
+            root.right = null;
         } else {
-            if (pp == pp.parent.left) {
-                pp.parent.left = pp.right;
-                pp.right.parent = pp.parent;
-                pp.right.left = pp;
-                pp.parent = pp.right;
-                pp.right = null;
+            if (root == root.parent.left) {
+                root.parent.left = root.right;
+                root.right.parent = root.parent;
+                root.right.left = root;
+                root.parent = root.right;
+                root.right = null;
             } else {
-                pp.parent.right = pp.right;
-                pp.right.parent = pp.parent;
-                pp.right.left = pp;
-                pp.parent = pp.right;
-                pp.right = null;
+                root.parent.right = root.right;
+                root.right.parent = root.parent;
+                root.right.left = root;
+                root.parent = root.right;
+                root.right = null;
             }
         }
     }
 
+    private void rotateRight(Node pp) {
+        if (pp == this.node) {
+            this.node = pp.left;  // this.node = root
+            pp.left.parent = null;
+            pp.left.right = pp;
+            pp.parent = pp.left;
+            pp.left = null;
+        } else {
+            if (pp == pp.parent.left) {
+                pp.parent.left = pp.left;
+                pp.left.parent = pp.parent;
+                pp.left.right = pp;
+                pp.parent = pp.left;
+                pp.left = null;
+            } else {
+                pp.parent.right = pp.left;
+                pp.left.parent = pp.parent;
+                pp.left.right = pp;
+                pp.parent = pp.left;
+                pp.left = null;
+            }
+        }
+    }
+
+
     public void delete(int d) {
         Node node = searchNode(this.node, d);
         if (node != null) {   //  <----  ADDED !
-            if (this.node ==node)
+            if (this.node == node)
                 this.node = deleteNode(this.node);
             else {
                 if (node.key<node.parent.key)
@@ -258,6 +311,31 @@ public class BinarySearchTree {
             t.showTree();
         }
 
+        System.out.println(t.node.key);
+
+        Node node = t.searchNode(t.node, 7); // 7 노드를 찾습니다.
+        if (node != null) {
+            System.out.println("\nBefore rotate left:");
+            t.showTree();
+
+            // 7 노드를 왼쪽으로 회전합니다.
+            t.rotateLeft(node);
+
+            System.out.println("\nAfter rotate left:");
+            t.showTree();
+        }
+
+        node = t.searchNode(t.node, 4); // 4 노드를 찾습니다.
+        if (node != null) {
+            System.out.println("\nBefore rotate right:");
+            t.showTree();
+
+            // 4 노드를 오른쪽으로 회전합니다.
+            t.rotateRight(node);
+
+            System.out.println("\nAfter rotate right:");
+            t.showTree();
+        }
 
         System.out.println(t.search(3));
         System.out.println(t.search(11));

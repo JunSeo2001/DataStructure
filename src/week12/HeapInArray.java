@@ -46,7 +46,7 @@ public class HeapInArray {
         if (heap.size() == 2) {
             heap.remove(1); // 1 == index 1
         } else {
-            heap.set(1, heap.remove(heap.size() - 1));
+            heap.set(1, heap.removeLast());
             fixDownward(1);
         }
         return retVal;
@@ -77,8 +77,12 @@ public class HeapInArray {
 
         for (int i = 0; i < 26; i++) {
             System.out.print(heap.delete());
-//            heap.showHeap();
+            heap.showHeap();
         }
+        int i = 1 /2;
+        System.out.println(i);
     }
+
+
 
 }
